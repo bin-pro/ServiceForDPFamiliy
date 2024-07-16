@@ -90,6 +90,8 @@ jobs:
                 -e DB_PORT=${{ secrets.DB_PORT }} \
                 -e INITIAL_DB=${{ secrets.INITIAL_DB }} \
                 -e SPRING_DATASOURCE_DDL_AUTO=${{ secrets.SPRING_DATASOURCE_DDL_AUTO }} \
+                -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
+                -e JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }} \
                 ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.NEXT_IMG_VER }}
             sleep 15
             sudo docker image prune -af || true
