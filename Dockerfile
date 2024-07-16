@@ -2,16 +2,16 @@
 FROM openjdk:17
 
 # 환경 변수 설정
-ENV APP_HOME /sdp-api-service
+ENV APP_HOME /ServiceForDPFamily
 
 # 작업 디렉토리 설정
 WORKDIR $APP_HOME
 
 # JAR 파일을 작업 디렉토리에 추가
-ADD ./build/libs/sdp-api-service-0.0.1-SNAPSHOT.jar sdp-api-service.jar
+ADD ./build/libs/ServiceForDPFamily-0.0.1-SNAPSHOT.jar ServiceForDPFamily.jar
 
 # 포트 설정
 EXPOSE 8080
 
 # 앱 실행
-ENTRYPOINT ["java","-jar","sdp-api-service.jar"]
+ENTRYPOINT ["java","-jar","ServiceForDPFamily.jar"]
