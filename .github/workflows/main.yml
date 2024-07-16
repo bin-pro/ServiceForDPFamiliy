@@ -45,13 +45,14 @@ jobs:
       - name: Determine and Push Next Version Tag
         run: |
           if ! git tag --sort version:refname | grep -q .; then
-            git tag 1.0.0
+            NEXT_IMG_VER="1.0.0"
           else
             NEXT_IMG_VER=$(git tag --sort version:refname | tail -n 1 | awk -F. -v OFS=. '{$NF++; print}')
-            git tag $NEXT_IMG_VER
           fi
+          git tag $NEXT_IMG_VER
           git push --tags
           echo "NEXT_IMG_VER=$NEXT_IMG_VER" >> $GITHUB_ENV
+          echo "Set NEXT_IMG_VER to: $NEXT_IMG_VER"
 
       - name: Login to DockerHub
         uses: docker/login-action@v1
