@@ -92,6 +92,8 @@ jobs:
                 -e SPRING_DATASOURCE_DDL_AUTO=${{ secrets.SPRING_DATASOURCE_DDL_AUTO }} \
                 -e JWT_SECRET=${{ secrets.JWT_SECRET }} \
                 -e JWT_EXPIRATION=${{ secrets.JWT_EXPIRATION }} \
+                -e OPEN_AI_API_KEY=${{ secrets.OPEN_AI_API_KEY }} \
+                -e OPEN_AI_MODEL_NAME=${{ secrets.OPEN_AI_MODEL_NAME }} \
                 ${{ secrets.DOCKER_USERNAME }}/${{ env.IMAGE_NAME }}:${{ env.NEXT_IMG_VER }}
             sleep 15
             sudo docker image prune -af || true
