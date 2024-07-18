@@ -10,6 +10,9 @@ public class OpenAiConfig {
     @Value("${app.open-ai.api-key}")
     private String apiKey;
 
+    @Value("${app.open-ai.timeout-seconds}")
+    private long timeoutSeconds;
+
     @Bean
     public OpenAiService openAiService() {
         return new OpenAiService(apiKey);

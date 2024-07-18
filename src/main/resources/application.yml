@@ -43,6 +43,7 @@ app:
   open-ai:
       api-key: ${OPEN_AI_API_KEY}
       model-name: ${OPEN_AI_MODEL_NAME}
+      timeout-seconds: 20
 #  host-url: ${HOST_URL}
 #  client1-url: ${CLIENT1_URL}
 #  client2-url: ${CLIENT2_URL}
