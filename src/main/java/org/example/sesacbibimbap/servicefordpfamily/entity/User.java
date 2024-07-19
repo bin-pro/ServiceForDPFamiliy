@@ -19,8 +19,9 @@ import java.util.UUID;
 @EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
-    @Column(name = "id", columnDefinition = "BINARY(16)")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
     @Column(name = "email", nullable = false, length = 50)
     private String email;
@@ -54,9 +55,6 @@ public class User {
 
     @PrePersist
     public void setId() {
-        if (id == null) {
-            id = UUID.randomUUID();
-        }
         if (this.createdAt == null)
             this.createdAt = LocalDateTime.now();
     }
