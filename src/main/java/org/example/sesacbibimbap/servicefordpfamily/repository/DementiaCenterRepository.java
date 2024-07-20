@@ -27,7 +27,8 @@ public interface DementiaCenterRepository extends JpaRepository<DementiaCenter, 
             "new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto$LocationInfo(" +
             "l.state, l.district, l.addressDetails, l.latitude, l.longitude)) " +
             "FROM DementiaCenter dc JOIN dc.locations l " +
-            "WHERE l.state = :state")
+            "WHERE l.state = :state " +
+            "ORDER BY dc.name ASC")
     Page<DementiaCenterDto> findCentersByState(String state, Pageable pageable);
 
     @Query("SELECT new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto(" +
@@ -35,13 +36,15 @@ public interface DementiaCenterRepository extends JpaRepository<DementiaCenter, 
             "new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto$LocationInfo(" +
             "l.state, l.district, l.addressDetails, l.latitude, l.longitude)) " +
             "FROM DementiaCenter dc JOIN dc.locations l " +
-            "WHERE l.state = :state AND l.district = :district")
+            "WHERE l.state = :state AND l.district = :district " +
+            "ORDER BY dc.name ASC")
     Page<DementiaCenterDto> findCentersByStateAndDistrict(String state, String district, Pageable pageable);
 
     @Query("SELECT new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto(" +
             "dc.id, dc.name, dc.operatingAgencyPhone, dc.websiteUrl, " +
             "new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto$LocationInfo(" +
             "l.state, l.district, l.addressDetails, l.latitude, l.longitude)) " +
-            "FROM DementiaCenter dc JOIN dc.locations l")
+            "FROM DementiaCenter dc JOIN dc.locations l " +
+            "ORDER BY dc.name ASC")
     Page<DementiaCenterDto> findAllCenters(Pageable pageable);
 }
