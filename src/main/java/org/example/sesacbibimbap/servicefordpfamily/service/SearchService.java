@@ -28,4 +28,24 @@ public class SearchService {
         }
         return dementiaCenterPage;
     }
+
+    public Page<DementiaCenterDto> searchCenters(String state, String district, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<DementiaCenterDto> dementiaCenterPage;
+
+        if(state == null) {
+            dementiaCenterPage = dementiaCenterRepository.findAllCenters(pageable);
+        } else if(district == null) {
+            dementiaCenterPage = dementiaCenterRepository.findCentersByState(state, pageable);
+        } else {
+            dementiaCenterPage = dementiaCenterRepository.findCentersByStateAndDistrict(state, district, pageable);
+        }
+
+        for(DementiaCenterDto dementiaCenterDto : dementiaCenterPage) {
+            log.info("Dementia Center: {}", dementiaCenterDto);
+            dementiaCenterDto.setDementiaPrograms(dementiaProgramRepository.findProgramsByCenterId(dementiaCenterDto.getId()));
+        }
+
+        return dementiaCenterPage;
+    }
 }

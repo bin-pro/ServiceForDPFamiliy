@@ -21,4 +21,27 @@ public interface DementiaCenterRepository extends JpaRepository<DementiaCenter, 
     Page<DementiaCenterDto> findNearbyCenters(@Param("latitude") double latitude,
                                               @Param("longitude") double longitude,
                                               Pageable pageable);
+
+    @Query("SELECT new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto(" +
+            "dc.id, dc.name, dc.operatingAgencyPhone, dc.websiteUrl, " +
+            "new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto$LocationInfo(" +
+            "l.state, l.district, l.addressDetails, l.latitude, l.longitude)) " +
+            "FROM DementiaCenter dc JOIN dc.locations l " +
+            "WHERE l.state = :state")
+    Page<DementiaCenterDto> findCentersByState(String state, Pageable pageable);
+
+    @Query("SELECT new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto(" +
+            "dc.id, dc.name, dc.operatingAgencyPhone, dc.websiteUrl, " +
+            "new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto$LocationInfo(" +
+            "l.state, l.district, l.addressDetails, l.latitude, l.longitude)) " +
+            "FROM DementiaCenter dc JOIN dc.locations l " +
+            "WHERE l.state = :state AND l.district = :district")
+    Page<DementiaCenterDto> findCentersByStateAndDistrict(String state, String district, Pageable pageable);
+
+    @Query("SELECT new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto(" +
+            "dc.id, dc.name, dc.operatingAgencyPhone, dc.websiteUrl, " +
+            "new org.example.sesacbibimbap.servicefordpfamily.dto.DementiaCenterDto$LocationInfo(" +
+            "l.state, l.district, l.addressDetails, l.latitude, l.longitude)) " +
+            "FROM DementiaCenter dc JOIN dc.locations l")
+    Page<DementiaCenterDto> findAllCenters(Pageable pageable);
 }

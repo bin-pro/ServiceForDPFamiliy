@@ -26,4 +26,20 @@ public class CenterInfoController {
 
         return ResponseEntity.ok(searchService.searchNearbyCenters(latitude, longitude, page, size));
     }
+
+    //@GetMapping("/") 지역별
+    @GetMapping("/region")
+    public ResponseEntity<Page<DementiaCenterDto>> searchRegionCenters(
+            @RequestParam(required = false) String state,
+            @RequestParam(required = false) String district,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        if(state == null && district == null) {
+            state = "서울특별시";
+        }
+        Page<DementiaCenterDto> response = searchService.searchCenters(state, district, page, size);
+
+        return ResponseEntity.ok(response);
+    }
 }

@@ -1,5 +1,7 @@
 package org.example.sesacbibimbap.servicefordpfamily.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class DementiaCenterDto {
     private Long id;
     private String name;
@@ -34,6 +37,18 @@ public class DementiaCenterDto {
         this.operatingAgencyPhone = operatingAgencyPhone != null ? operatingAgencyPhone : "";
         this.websiteUrl = websiteUrl != null ? websiteUrl : "";
         this.distance = distance != null ? distance : 0.0;
+        this.locationInfo = locationInfo;
+    }
+    @Builder
+    public DementiaCenterDto(Long id,
+                             String name,
+                             String operatingAgencyPhone,
+                             String websiteUrl,
+                             LocationInfo locationInfo) {
+        this.id = id;
+        this.name = name != null ? name : "";
+        this.operatingAgencyPhone = operatingAgencyPhone != null ? operatingAgencyPhone : "";
+        this.websiteUrl = websiteUrl != null ? websiteUrl : "";
         this.locationInfo = locationInfo;
     }
 
