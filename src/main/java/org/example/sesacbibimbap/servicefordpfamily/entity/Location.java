@@ -8,11 +8,15 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "locations")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "locations", indexes = {
+        @Index(name = "idx_latitude_longitude", columnList = "latitude,longitude"),
+        @Index(name = "idx_state", columnList = "state"),
+        @Index(name = "idx_district", columnList = "district")
+})
 public class Location {
     //state	district	address_details	latitude	longitude
 
@@ -30,10 +34,10 @@ public class Location {
     @Column(name = "address_details", length = 100)
     private String addressDetails;
 
-    @Column(name = "latitude", length = 30)
+    @Column(name = "latitude", length = 50)
     private Double latitude;
 
-    @Column(name = "longitude", length = 30)
+    @Column(name = "longitude", length = 50)
     private Double longitude;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
